@@ -1,3 +1,9 @@
+/*
+========================
+Checking crm_cust_info
+========================
+*/
+
 -- Check id duplicates and NULL id's
 select cst_id, count(*) from silver.crm_cust_info
 GROUP BY cst_id
@@ -18,4 +24,17 @@ select cst_gndr
 FROM silver.crm_cust_info
 GROUP BY cst_gndr;
 
-select * from silver.crm_cust_info;
+/*
+========================
+Checking crm_prd_info
+========================
+*/
+
+-- Check prd_id duplicates and NULL prd_id's
+select prd_id, count(*) from silver.crm_prd_info
+GROUP BY prd_id
+HAVING count(*) > 1 OR prd_id IS NULL;
+
+-- Check start date is before end date
+select * from silver.crm_prd_info
+WHERE prd_end_dt < prd_start_dt;
