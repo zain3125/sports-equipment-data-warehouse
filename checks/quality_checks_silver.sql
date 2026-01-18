@@ -55,3 +55,29 @@ FROM silver.crm_prd_info;
 -- Check start date is before end date
 select * from silver.crm_prd_info
 WHERE prd_end_dt < prd_start_dt;
+
+/*
+============================
+Checking crm_sales_details
+============================
+*/
+-- Check spaces before OR after prd_key
+select sls_prd_key from silver.crm_sales_details
+where sls_prd_key != TRIM(sls_prd_key);
+
+-- Check order of Dates
+SELECT * FROM bronz.crm_sales_details
+where sls_order_dt > sls_ship_dt
+or sls_ship_dt > sls_due_dt;
+
+-- check price calc
+SELECT * FROM bronz.crm_sales_details
+where ABS(sls_price) != ABS(sls_sales) * sls_quantity;
+
+SELECT * FROM bronz.crm_sales_details
+where
+sls_sales <= 0 or sls_sales) IS null;
+
+SELECT * FROM bronz.crm_sales_details
+where
+sls_quantity !=1;
