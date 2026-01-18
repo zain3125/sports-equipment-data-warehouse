@@ -24,10 +24,10 @@ SELECT
     END AS cst_gndr,
     cst_create_date
 FROM
-    (select *, ROW_NUMBER() OVER(
+    (SELECT *, ROW_NUMBER() OVER(
         PARTITION BY cst_id ORDER BY cst_create_date DESC) AS flag
     FROM bronz.crm_cust_info WHERE cst_id IS NOT NULL) t
-where flag = 1; 
+WHERE flag = 1; 
 
 TRUNCATE TABLE silver.crm_prd_info;
 INSERT INTO silver.crm_prd_info(
