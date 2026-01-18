@@ -5,7 +5,8 @@ INSERT INTO silver.crm_cust_info(
     cst_firstname,
     cst_lastname,
     cst_marital_status,
-    cst_gndr,cst_create_date)
+    cst_gndr,cst_create_date
+    )
 SELECT 
     cst_id,
     cst_key,
@@ -37,7 +38,8 @@ INSERT INTO silver.crm_prd_info(
 	prd_cost,
 	prd_line,
 	prd_start_dt,
-	prd_end_dt)
+	prd_end_dt
+    )
 SELECT
     prd_id,
     REPLACE(substr(prd_key, 1, 5), '-', '_') AS cat_id,
@@ -54,3 +56,48 @@ SELECT
     prd_start_dt,
     LEAD(prd_start_dt) OVER(PARTITION BY prd_key ORDER BY prd_start_dt) -1 AS prd_end_dt
 FROM bronz.crm_prd_info;
+
+TRUNCATE TABLE silver.crm_sales_details;
+INSERT INTO silver.crm_sales_details(
+	sls_ord_num,
+	sls_prd_key,
+	sls_cust_id,
+	sls_order_dt,
+	sls_ship_dt,
+	sls_due_dt,
+	sls_price,
+	sls_quantity,
+    sls_sales
+    )
+
+WITH sales_clean AS (
+    SELECT 
+        sls_ord_num,
+        sls_prd_key,
+        sls_cust_id,
+			CASE 
+				WHEN sls_order_dt BETWEEN 19000101 AND 20500101
+				    THEN TO_DATE(sls_order_dt::TEXT, 'YYYYMMDD')
+                ELSE NULL
+			END AS sls_order_dt,
+			CASE 
+				WHEN sls_ship_dt BETWEEN 19000101 AND 20500101
+				    THEN TO_DATE(sls_ship_dt::TEXT, 'YYYYMMDD')
+                ELSE NULL
+			END AS sls_ship_dt,
+			CASE 
+				WHEN sls_due_dt BETWEEN 19000101 AND 20500101
+				    THEN TO_DATE(sls_due_dt::TEXT, 'YYYYMMDD')
+                ELSE NULL
+			END AS sls_due_dt,
+        CASE 
+            WHEN sls_sales IS NULL OR sls_sales = 0
+                THEN (sls_quantity * sls_price)
+            ELSE ABS(sls_sales)
+        END AS sls_price,
+        sls_quantity
+    FROM bronz.crm_sales_details
+)
+SELECT *,
+       sls_price * sls_quantity AS sls_sales
+FROM sales_clean;
