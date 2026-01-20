@@ -83,3 +83,30 @@ WHERE sls_sales != sls_price * sls_quantity;
 
 SELECT * FROM silver.crm_sales_details
 WHERE sls_sales != sls_price * sls_quantity;
+
+/*
+============================
+Checking erp_cust_az12
+============================
+*/
+-- Check spaces before OR after cid
+SELECT * FROM silver.erp_cust_az12
+WHERE cid != TRIM(cid);
+
+-- Check cid duplicates and NULL cid's
+SELECT cid, COUNT(*) FROM silver.erp_cust_az12
+GROUP BY cid
+HAVING COUNT(*) > 1 OR cid IS NULL;
+
+-- Check birth date before current date
+SELECT * FROM silver.erp_cust_az12
+WHERE bdate > CURRENT_DATE;
+
+-- Data Standardization & Consistency
+SELECT DISTINCT gen,
+    CASE 
+        WHEN UPPER(TRIM(gen)) IN ('F', 'FEMALE') THEN  'Female'
+        WHEN UPPER(TRIM(gen)) IN ('M', 'MALE') THEN  'Male'
+        ELSE 'N/A'
+    END AS gen
+FROM silver.erp_cust_az12;
