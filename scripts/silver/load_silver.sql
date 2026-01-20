@@ -102,6 +102,7 @@ SELECT *,
        sls_price * sls_quantity AS sls_sales
 FROM sales_clean;
 
+TRUNCATE TABLE silver.erp_cust_az12;
 INSERT INTO silver.erp_cust_az12(cid, bdate, gen)
 SELECT
     CASE 
@@ -119,6 +120,7 @@ SELECT
     END AS gen
 FROM bronz.erp_cust_az12;
 
+TRUNCATE TABLE silver.erp_LOC_A101;
 INSERT INTO silver.erp_LOC_A101(cid, cntry)
 SELECT
     REPLACE(cid, '-', ''),
@@ -129,3 +131,7 @@ SELECT
         ELSE TRIM(cntry)
     END cntry
 FROM bronz.erp_LOC_A101;
+
+TRUNCATE TABLE silver.erp_PX_CAT_G1V2;
+INSERT INTO silver.erp_PX_CAT_G1V2(id, cat, subcat, maintenance)
+SELECT * FROM bronz.erp_PX_CAT_G1V2;
