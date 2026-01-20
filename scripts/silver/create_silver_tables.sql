@@ -55,24 +55,24 @@ CREATE TABLE silver.crm_sales_details(
 -- ERP tables schema
 DROP TABLE IF EXISTS silver.erp_CUST_AZ12;
 CREATE TABLE silver.erp_CUST_AZ12(
-    CID VARCHAR(20),
-    BDATE DATE,
-    GEN VARCHAR(10),
+    cid VARCHAR(20),
+    bdate DATE,
+    gen VARCHAR(10),
     dwh_create_ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 DROP TABLE IF EXISTS silver.erp_LOC_A101;
 CREATE TABLE silver.erp_LOC_A101(
-    CID VARCHAR(20),
-    CNTRY VARCHAR(50),
+    cid VARCHAR(20),
+    cntry VARCHAR(50),
     dwh_create_ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 DROP TABLE IF EXISTS silver.erp_PX_CAT_G1V2;
 CREATE TABLE silver.erp_PX_CAT_G1V2(
-    ID VARCHAR(20),
-    CAT VARCHAR(20),
-    SUBCAT VARCHAR(20),
-    MAINTENANCE VARCHAR(20),
+    id VARCHAR(20),
+    cat VARCHAR(20),
+    subcat VARCHAR(20),
+    maintenance VARCHAR(20),
     dwh_create_ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
