@@ -102,11 +102,7 @@ SELECT *,
        sls_price * sls_quantity AS sls_sales
 FROM sales_clean;
 
-INSERT INTO silver.erp_cust_az12(
-    cid,
-    bdate,
-    gen
-    )
+INSERT INTO silver.erp_cust_az12(cid, bdate, gen)
 SELECT
     CASE 
         WHEN cid LIKE 'NAS%' THEN substr(cid, 4)
@@ -122,3 +118,14 @@ SELECT
         ELSE 'N/A'
     END AS gen
 FROM bronz.erp_cust_az12;
+
+INSERT INTO silver.erp_LOC_A101(cid, cntry)
+SELECT
+    REPLACE(cid, '-', ''),
+    CASE 
+        WHEN TRIM(cntry) IN ('USA', 'US') THEN 'United States'
+        WHEN TRIM(cntry) = 'DE' THEN 'Germany'
+        WHEN TRIM(cntry) = '' OR cntry IS NULL THEN 'N/A'
+        ELSE TRIM(cntry)
+    END cntry
+FROM bronz.erp_LOC_A101;
