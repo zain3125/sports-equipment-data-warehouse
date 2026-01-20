@@ -110,3 +110,11 @@ SELECT DISTINCT gen,
         ELSE 'N/A'
     END AS gen
 FROM silver.erp_cust_az12;
+
+/*
+============================
+Checking erp_LOC_A101
+============================
+*/
+-- Data Standardization & Consistency
+SELECT DISTINCT cntry FROM silver.erp_loc_a101;
