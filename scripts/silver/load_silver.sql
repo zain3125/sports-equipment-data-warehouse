@@ -101,3 +101,24 @@ WITH sales_clean AS (
 SELECT *,
        sls_price * sls_quantity AS sls_sales
 FROM sales_clean;
+
+INSERT INTO silver.erp_cust_az12(
+    cid,
+    bdate,
+    gen
+    )
+SELECT
+    CASE 
+        WHEN cid LIKE 'NAS%' THEN substr(cid, 4)
+        ELSE cid
+    END AS cid,
+    CASE 
+        WHEN bdate > CURRENT_DATE THEN NULL
+        ELSE bdate
+    END AS bdate,
+    CASE 
+        WHEN UPPER(TRIM(gen)) IN ('F', 'FEMALE') THEN  'Female'
+        WHEN UPPER(TRIM(gen)) IN ('M', 'MALE') THEN  'Male'
+        ELSE 'N/A'
+    END AS gen
+FROM bronz.erp_cust_az12;
