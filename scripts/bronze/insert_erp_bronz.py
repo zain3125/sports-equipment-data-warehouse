@@ -9,7 +9,7 @@ host = "localhost"
 dbname = "sports_DWH"
 user = "zain_super"
 password = "password"
-schema = "bronz"
+schema = "bronze"
 parquet_dir = Path("/mnt/ssd/sports-equipment-data-warehouse/data/source_erp_parquet/")
 
 # Connect to PostgreSQL
