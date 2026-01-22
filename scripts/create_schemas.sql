@@ -12,8 +12,8 @@ WARNING:
     and ensure you have proper backups before running this script.
 */
 
-DROP SCHEMA IF EXISTS bronz CASCADE;
-CREATE SCHEMA bronz;
+DROP SCHEMA IF EXISTS bronze CASCADE;
+CREATE SCHEMA bronze;
 
 DROP SCHEMA IF EXISTS silver CASCADE;
 CREATE SCHEMA silver;

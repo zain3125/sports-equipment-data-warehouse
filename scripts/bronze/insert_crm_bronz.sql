@@ -12,8 +12,8 @@ WARNING:
 
 */
 
-TRUNCATE TABLE bronz.crm_cust_info;
-COPY bronz.crm_cust_info
+TRUNCATE TABLE bronze.crm_cust_info;
+COPY bronze.crm_cust_info
 FROM '/mnt/ssd/sports-equipment-data-warehouse/data/source_crm_csv/cust_info.csv'
 WITH (
     FORMAT csv,
@@ -21,8 +21,8 @@ WITH (
     DELIMITER ','
 );
 
-TRUNCATE TABLE bronz.crm_prd_info;
-COPY bronz.crm_prd_info
+TRUNCATE TABLE bronze.crm_prd_info;
+COPY bronze.crm_prd_info
 FROM '/mnt/ssd/sports-equipment-data-warehouse/data/source_crm_csv/prd_info.csv'
 WITH (
     FORMAT csv,
@@ -30,12 +30,12 @@ WITH (
     DELIMITER ','
 );
 
-TRUNCATE TABLE bronz.crm_sales_details;
-COPY bronz.crm_sales_details
+TRUNCATE TABLE bronze.crm_sales_details;
+COPY bronze.crm_sales_details
 FROM '/mnt/ssd/sports-equipment-data-warehouse/data/source_crm_csv/sales_details.csv'
 WITH (
     FORMAT csv,
     HEADER true,
     DELIMITER ','
 );
-select * from bronz.crm_prd_info;
+select * from bronze.crm_prd_info;

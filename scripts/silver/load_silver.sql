@@ -26,7 +26,7 @@ SELECT
 FROM
     (SELECT *, ROW_NUMBER() OVER(
         PARTITION BY cst_id ORDER BY cst_create_date DESC) AS flag
-    FROM bronz.crm_cust_info WHERE cst_id IS NOT NULL) t
+    FROM bronze.crm_cust_info WHERE cst_id IS NOT NULL) t
 WHERE flag = 1; 
 
 TRUNCATE TABLE silver.crm_prd_info;
@@ -55,7 +55,7 @@ SELECT
     END AS prd_line,
     prd_start_dt,
     LEAD(prd_start_dt) OVER(PARTITION BY prd_key ORDER BY prd_start_dt) -1 AS prd_end_dt
-FROM bronz.crm_prd_info;
+FROM bronze.crm_prd_info;
 
 TRUNCATE TABLE silver.crm_sales_details;
 INSERT INTO silver.crm_sales_details(
@@ -96,7 +96,7 @@ WITH sales_clean AS (
             ELSE ABS(sls_sales)
         END AS sls_price,
         sls_quantity
-    FROM bronz.crm_sales_details
+    FROM bronze.crm_sales_details
 )
 SELECT *,
        sls_price * sls_quantity AS sls_sales
@@ -118,7 +118,7 @@ SELECT
         WHEN UPPER(TRIM(gen)) IN ('M', 'MALE') THEN  'Male'
         ELSE 'N/A'
     END AS gen
-FROM bronz.erp_cust_az12;
+FROM bronze.erp_cust_az12;
 
 TRUNCATE TABLE silver.erp_LOC_A101;
 INSERT INTO silver.erp_LOC_A101(cid, cntry)
@@ -130,8 +130,8 @@ SELECT
         WHEN TRIM(cntry) = '' OR cntry IS NULL THEN 'N/A'
         ELSE TRIM(cntry)
     END cntry
-FROM bronz.erp_LOC_A101;
+FROM bronze.erp_LOC_A101;
 
 TRUNCATE TABLE silver.erp_PX_CAT_G1V2;
 INSERT INTO silver.erp_PX_CAT_G1V2(id, cat, subcat, maintenance)
-SELECT * FROM bronz.erp_PX_CAT_G1V2;
+SELECT * FROM bronze.erp_PX_CAT_G1V2;
