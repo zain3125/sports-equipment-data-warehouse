@@ -72,8 +72,8 @@ BEGIN
         )
     SELECT
         prd_id,
-        REPLACE(substr(prd_key, 1, 5), '-', '_') AS cat_id,
-        REPLACE(substr(prd_key, 7), '-', '_') AS prd_key,
+        substr(prd_key, 1, 5) AS cat_id,
+        substr(prd_key, 7) AS prd_key,
         prd_nm,
         COALESCE(prd_cost, 0) AS prd_cost,
         CASE 
