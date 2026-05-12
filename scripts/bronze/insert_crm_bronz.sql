@@ -27,7 +27,7 @@ BEGIN
 
     RAISE NOTICE 'Loading data into: bronze.crm_cust_info';
     COPY bronze.crm_cust_info
-    FROM '/mnt/ssd/sports-equipment-data-warehouse/data/source_crm_csv/cust_info.csv'
+    FROM '/var/lib/postgresql/crm_data/cust_info.csv'
     WITH (
         FORMAT csv,
         HEADER true,
@@ -42,7 +42,7 @@ BEGIN
 
     RAISE NOTICE 'Loading data into: bronze.crm_prd_info';
     COPY bronze.crm_prd_info
-    FROM '/mnt/ssd/sports-equipment-data-warehouse/data/source_crm_csv/prd_info.csv'
+    FROM '/var/lib/postgresql/crm_data/prd_info.csv'
     WITH (
         FORMAT csv,
         HEADER true,
@@ -57,7 +57,7 @@ BEGIN
 
     RAISE NOTICE 'Loading data into: bronze.crm_sales_details';
     COPY bronze.crm_sales_details
-    FROM '/mnt/ssd/sports-equipment-data-warehouse/data/source_crm_csv/sales_details.csv'
+    FROM '/var/lib/postgresql/crm_data/sales_details.csv'
     WITH (
         FORMAT csv,
         HEADER true,
