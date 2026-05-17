@@ -9,7 +9,7 @@ NUM_RECORDS = 20000
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-OUTPUT_PATH = PROJECT_ROOT / "source_erp_parquet/LOC_A101.parquet"
+OUTPUT_PATH = PROJECT_ROOT / "data/source_erp_parquet/LOC_A101.parquet"
 
 locations = []
 

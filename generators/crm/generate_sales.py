@@ -9,7 +9,7 @@ fake = Faker()
 NUM_ROWS = 70000
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-OUTPUT_PATH = PROJECT_ROOT / "source_crm_csv/sales_details.csv"
+OUTPUT_PATH = PROJECT_ROOT / "data/source_crm_csv/sales_details.csv"
 
 
 # Attempt to load real products and customers to keep joins consistent.

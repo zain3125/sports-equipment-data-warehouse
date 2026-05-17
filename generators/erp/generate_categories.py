@@ -4,7 +4,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-OUTPUT_PATH = PROJECT_ROOT / "source_erp_parquet/PX_CAT_G1V2.parquet"
+OUTPUT_PATH = PROJECT_ROOT / "data/source_erp_parquet/PX_CAT_G1V2.parquet"
 
 BASE_CATEGORIES = [
     ("AC_HE", "Accessories", "Helmets"),

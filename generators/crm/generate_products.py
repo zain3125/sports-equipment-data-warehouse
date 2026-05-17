@@ -10,7 +10,7 @@ NUM_PRODUCTS = 500
 START_PRD_ID = 210
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-OUTPUT_PATH = PROJECT_ROOT / "source_crm_csv/prd_info.csv"
+OUTPUT_PATH = PROJECT_ROOT / "data/source_crm_csv/prd_info.csv"
 
 products = []
 

@@ -9,7 +9,7 @@ NUM_RECORDS = 30000
 START_ID = 11000
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-OUTPUT_PATH = PROJECT_ROOT / "source_crm_csv/cust_info.csv"
+OUTPUT_PATH = PROJECT_ROOT / "data/source_crm_csv/cust_info.csv"
 
 customers = []
 marital_status_values = [
