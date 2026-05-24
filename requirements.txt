@@ -1,7 +1,0 @@
-pandas
-pyarrow
-psycopg2-binary
-faker
-snowflake-connector-python
-apache-airflow-providers-snowflake
-dbt-snowflake
